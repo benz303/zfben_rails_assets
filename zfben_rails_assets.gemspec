@@ -32,7 +32,4 @@ Gem::Specification.new do |s|
   s.add_dependency  'therubyracer'
   s.add_dependency  'coffee-script'
   s.add_dependency  'uglifier'
-  
-  # external
-  s.add_dependency  'zff'
 end
