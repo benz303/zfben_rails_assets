@@ -1,0 +1,7 @@
+*.lock
+*.log
+*.swp
+log/
+tmp/
+public/caches
+public/assets
