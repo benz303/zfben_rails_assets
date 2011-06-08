@@ -8,17 +8,17 @@ module('Load module');
 
 asyncTest('success load', function(){
   
-  ok($.load('underscore') === 202, 'underscore is not loaded');
+  ok($.load('zff/lib/underscore/core') === 202, 'underscore is not loaded');
   
   var i = 0;
   
-  $.load('underscore', function(){
+  $.load('zff/lib/underscore/core', function(){
     ok($.isFunction(_), '_ is loaded');
-    ok($.load('underscore') === 200, 'underscore loaded');
+    ok($.load('zff/lib/underscore/core') === 200, 'zff/lib/underscore/core loaded');
     i++;
     ok(i === 1, 'success func is loaded');
   });
-  $.load('underscore', function(){
+  $.load('zff/lib/underscore/core', function(){
     i++;
     ok(i === 2, 'twice success func is loaded');
     start();

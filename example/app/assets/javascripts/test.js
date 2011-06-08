@@ -1,3 +1,2 @@
-//= require qunit
-//= require zzf
-//= require zzf-spec
+//= require zff/spec
+//= require zff/core
