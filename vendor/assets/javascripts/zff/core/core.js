@@ -1,6 +1,4 @@
-//= require jquery
-
-// zzf-core
+//= require zff/lib/jquery/core
 
 var MODULE_PATH = '/assets';
 
