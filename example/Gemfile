@@ -5,3 +5,4 @@ gem 'sqlite3'
 
 gem 'zfben_rails_rake'
 gem 'zfben_rails_assets'
+gem 'compass', :require => false

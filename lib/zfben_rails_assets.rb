@@ -6,7 +6,7 @@ module ZfbenRailsAssets
     railtie_name :zfben_rails_assets
       
     rake_tasks do
-      load File.join(ZfbenRailsRakePath, 'tasks.rb')
+      load File.join(ZfbenRailsAssetsPath, 'tasks.rb')
     end
   end
 end

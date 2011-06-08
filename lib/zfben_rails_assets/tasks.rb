@@ -17,6 +17,11 @@ namespace :assets do
     sys('rm -r ' + js_path) if File.exists?(js_path)
     sys('rm -r ' + css_path) if File.exists?(css_path)
     sys('rm -r ' + img_path) if File.exists?(img_path)
-    sys 'cp ' << File.join(ZfbenRailsAssetsPath, 'assets') << ' ' << File.join(Rails.root, 'app', 'assets')
+    sys 'cp -Ruf ' << File.join(ZfbenRailsAssetsPath, 'assets') << ' ' << File.join(Rails.root, 'app')
+  end
+  
+  desc 'copy config files to config'
+  task :copy_config do
+    sys 'cp -Ruf ' << File.join(ZfbenRailsAssetsPath, 'config', 'compass.rb') << ' ' << File.join(Rails.root, 'config')
   end
 end
