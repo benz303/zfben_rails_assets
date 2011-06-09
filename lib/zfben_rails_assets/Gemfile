@@ -1,0 +1,12 @@
+# html
+gem 'haml'
+gem 'haml-coderay'
+gem 'coderay_bash'
+
+# css
+gem 'compass'
+
+# js
+gem 'therubyracer'
+gem 'coffee-script'
+gem 'uglifier'
