@@ -1,9 +1,5 @@
-def p str
-  STDOUT.puts str.color(:black).background(:white)
-end
-
 def sys cmd
-  p cmd
+  STDOUT.puts str.color(:black).background(:white)
   system cmd
 end
 
@@ -14,7 +10,7 @@ end
 
 namespace :assets do
   task :clear_assets do
-    p 'Clear old assets'
+    p '== Clear old assets'
     js_path = File.join(Rails.root, 'app', 'assets', 'javascripts', 'zff')
     css_path = File.join(Rails.root, 'app', 'assets', 'stylesheets', 'zff')
     img_path = File.join(Rails.root, 'app', 'assets', 'images', 'zff')
@@ -25,20 +21,8 @@ namespace :assets do
   
   desc 'add assets files to app/assets'
   task :add_assets => :clear_assets do
-    p 'Add assets'
+    p '== Add assets'
     sys 'cp -Ruf ' << File.join(ZfbenRailsAssetsPath, 'assets') << ' ' << File.join(Rails.root, 'app')
-  end
-  
-  task :clear_config do
-    p 'Clear old config'
-    config_path = File.join(Rails.root, 'config', 'compass.rb')
-    sys('rm ' + config_path) if File.exists?(config_path)
-  end
-  
-  desc 'add config files to config'
-  task :add_config => :clear_config do
-    p 'Add config'
-    sys 'cp -Ruf ' << File.join(ZfbenRailsAssetsPath, 'config', 'compass.rb') << ' ' << File.join(Rails.root, 'config')
   end
   
   task :clear_gem do
@@ -46,7 +30,7 @@ namespace :assets do
     unless File.exists? gem_path
       err 'Gemfile is not exists'
     else
-      p 'Clear old gems'
+      p '== Clear old gems'
       file = File.open(gem_path).readlines.join('')
       regexp = /(\n)?# Added by zfben_rails_assets.*# End zfben_rails_assets/im
       File.open(gem_path, 'w'){ |f| f.write(file.gsub(regexp, '')) } if file =~ regexp
@@ -55,7 +39,7 @@ namespace :assets do
   
   desc 'add Gemfile'
   task :add_gem => :clear_gem do
-    p 'Add gems'
+    p '== Add gems'
     gem_path = File.join(Rails.root, 'Gemfile')
     file = File.open(gem_path).readlines
     file.push "\n# Added by zfben_rails_assets\n\n" << File.open(File.join(ZfbenRailsAssetsPath, 'Gemfile')).readlines.join('') << "\n# End zfben_rails_assets"
@@ -63,11 +47,11 @@ namespace :assets do
   end
   
   desc 'install zfben_rails_assets'
-  task :install => [:add_gem, :add_config, :add_assets] do
+  task :install => [:add_gem, :add_assets] do
     p ''
-    p 'Please run `bundle install`'
+    p '!! Please run `bundle install`'
   end
   
   desc 'uninstall zfben_rails_assets'
-  task :uninstall => [:clear_gem, :clear_config, :clear_assets]
+  task :uninstall => [:clear_gem, :clear_assets]
 end
