@@ -6,6 +6,7 @@ gem 'sqlite3'
 gem 'zfben_rails_rake'
 gem 'zfben_rails_assets'
 
+
 # Added by zfben_rails_assets
 
 # html
@@ -14,7 +15,8 @@ gem 'haml-coderay'
 gem 'coderay_bash'
 
 # css
-gem 'compass'
+gem 'sass-rails', :git => 'git://github.com/rails/sass-rails.git'
+gem 'compass', :git => 'https://github.com/chriseppstein/compass.git', :branch => 'rails31'
 
 # js
 gem 'therubyracer'

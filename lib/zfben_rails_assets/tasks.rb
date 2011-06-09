@@ -64,7 +64,8 @@ namespace :assets do
   
   desc 'install zfben_rails_assets'
   task :install => [:add_gem, :add_config, :add_assets] do
-    sys 'bundle install'
+    p ''
+    p 'Please run `bundle install`'
   end
   
   desc 'uninstall zfben_rails_assets'
