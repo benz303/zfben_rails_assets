@@ -1,0 +1,21 @@
+== SUMMARY
+
+This is plugin to add some useful assets to rails.
+
+== Getting Started
+
+1. adding gem to Gemfile
+
+  gem 'zfben_rails_assets'
+
+2. update bundle
+
+  bundle install
+
+3. install assets
+
+  rake assets:install
+
+4. install assets gems
+
+  bundle install

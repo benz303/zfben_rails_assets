@@ -1,5 +1,6 @@
+require 'rainbow'
 def sys cmd
-  STDOUT.puts str.color(:black).background(:white)
+  STDOUT.puts cmd.color(:black).background(:white)
   system cmd
 end
 
