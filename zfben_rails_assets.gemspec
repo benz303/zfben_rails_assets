@@ -17,17 +17,4 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  
-  # html
-  s.add_dependency  'haml'
-  s.add_dependency  'haml-coderay'
-  s.add_dependency  'coderay_bash'
-  
-  # css
-  s.add_dependency  'compass'
-  
-  # javascript
-  s.add_dependency  'therubyracer'
-  s.add_dependency  'coffee-script'
-  s.add_dependency  'uglifier'
 end

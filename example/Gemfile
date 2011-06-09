@@ -5,3 +5,20 @@ gem 'sqlite3'
 
 gem 'zfben_rails_rake'
 gem 'zfben_rails_assets'
+
+# Added by zfben_rails_assets
+
+# html
+gem 'haml'
+gem 'haml-coderay'
+gem 'coderay_bash'
+
+# css
+gem 'compass'
+
+# js
+gem 'therubyracer'
+gem 'coffee-script'
+gem 'uglifier'
+
+# End zfben_rails_assets
