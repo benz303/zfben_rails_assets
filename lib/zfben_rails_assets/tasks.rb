@@ -19,8 +19,7 @@ namespace :assets do
     sys('rm -r ' + css_path) if File.exists?(css_path)
     sys('rm -r ' + img_path) if File.exists?(img_path)
   end
-  
-  desc 'add assets files to app/assets'
+
   task :add_assets => :clear_assets do
     p '== Add assets'
     sys 'cp -Ruf ' << File.join(ZfbenRailsAssetsPath, 'assets') << ' ' << File.join(Rails.root, 'app')
@@ -37,8 +36,7 @@ namespace :assets do
       File.open(gem_path, 'w'){ |f| f.write(file.gsub(regexp, '')) } if file =~ regexp
     end
   end
-  
-  desc 'add Gemfile'
+
   task :add_gem => :clear_gem do
     p '== Add gems'
     gem_path = File.join(Rails.root, 'Gemfile')
