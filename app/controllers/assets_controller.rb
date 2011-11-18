@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class ApplicationController < ActionController::Base
+class AssetsController < ActionController::Base
   def index
     render :text => 'ok'
   end
