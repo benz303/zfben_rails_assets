@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   
   s.required_ruby_version     = '>= 1.9'
   
-  s.add_dependency 'rainbow'
+  s.add_dependency 'rails', '>=3.1.0'
   s.add_dependency 'compass'
   s.add_dependency 'coffee-script'
   s.add_dependency 'uglifier'

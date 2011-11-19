@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  mount ZfbenRailsAssets::Engine => '/'
-end
-
-ZfbenRailsAssets::Engine.routes.draw do
-  get '/assets/:file(.:format)' => 'assets#index'
+  get '/assets/:version/*file' => 'assets#index'
+  get '/assets/*file' => 'assets#index'
 end
