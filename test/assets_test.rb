@@ -99,6 +99,18 @@ class ControllerTest < ActionController::TestCase
   test 'sass.css' do
     get :index, file: 'sass', format: 'css'
     assert_response :success
-    assert_equal @response.body, ::Sass::Engine.new(File.read(Rails.root.to_s + '/app/assets/simple.sass'), { :syntax => :sass, :style => :expanded }).render
+    assert_equal @response.body, ::Sass::Engine.new(File.read(Rails.root.to_s + '/app/assets/sass.sass'), { syntax: :sass, style: :expanded }).render
+  end
+
+  test 'scss.css' do
+    get :index, file: 'scss', format: 'css'
+    assert_response :success
+    assert_equal @response.body, ::Sass::Engine.new(File.read(Rails.root.to_s + '/app/assets/scss.scss'), { syntax: :scss, style: :expanded }).render
+  end
+
+  test 'coffee.js' do
+    get :index, file: 'coffee', format: 'js'
+    assert_response :success
+    assert_equal @response.body, CoffeeScript.compile(File.read(Rails.root.to_s + '/app/assets/coffee.coffee'))
   end
 end

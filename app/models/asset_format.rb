@@ -18,7 +18,7 @@ class AssetFormat
   def log
     status == 200 ? ('read ' + @path) : ('error: ' + @text || '')
   end
-  
+
   private
   
   def not_found path
@@ -32,17 +32,15 @@ class AssetFormat
   
   def initialize file
     @option = file.split('.')
+    @format = @option.last
     path = find_file(@option[0] + '.' + @option.last)
     unless path.nil?
-      text = File.read(path)
+      text = read_file path
       if defined?(self.class::IMPORT)
         regexp = self.class::IMPORT
         text = import_file regexp, text
       end
       if no_error?
-        if self.respond_to?(:complie)
-          text = complie(text)
-        end
         if @option.include?('min') && self.respond_to?(:minify)
           text = minify(text)
         end
@@ -58,13 +56,27 @@ class AssetFormat
     if File.exist?(path)
       return path
     else
-      list = Dir[path + '.*']
+      path = path.gsub('.' + @format, '')
+      formats = [@format]
+      if defined?(self.class::EXTEND_FORMATS)
+        formats = formats + self.class::EXTEND_FORMATS
+      end
+      list = Dir.glob(formats.map{ |f| path + '.' + f.to_s })
       if list.length > 0
         return list[0]
       else
         return nil
       end
     end
+  end
+
+  def read_file file
+    text = File.read file
+    format = File.extname(file).gsub('.', '').to_sym
+    if self.respond_to?(format)
+      text = self.method(format).call(text)
+    end
+    text
   end
   
   def write_file name, text
@@ -77,15 +89,11 @@ class AssetFormat
     path
   end
   
-  def compile_file
-    File.read(file)
-  end
-  
   def import_file regexp, text
     text.gsub(regexp){ |s|
       file = find_file(regexp.match(s)[1])
       unless file.nil?
-        "\n/* #{file} */\n" << import_file(regexp, compile_file(file))
+        "\n/* #{file} */\n" << import_file(regexp, read_file(file))
       else
         not_found s
         break

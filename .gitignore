@@ -1,8 +1,5 @@
 *.gem
+*.log
 .bundle
 Gemfile.lock
 pkg/*
-example/app/assets/javascripts/zff
-example/app/assets/stylesheets/zff
-example/app/assets/images/zff
-example/config/compass.rb
