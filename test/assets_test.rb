@@ -114,3 +114,32 @@ class ControllerTest < ActionController::TestCase
     assert_equal @response.body, CoffeeScript.compile(File.read(Rails.root.to_s + '/app/assets/coffee.coffee'))
   end
 end
+
+class AssetsHelperTest < ActionView::TestCase
+  setup do
+    Rails.configuration.action_controller[:asset_host] = nil
+    Rails.configuration.action_controller[:asset_path] = nil
+    Rails.configuration.action_controller[:asset_version] = nil
+  end
+
+  test 'assets blank.css' do
+    assert_equal assets('blank.css'), '<link rel="stylesheet" href="/assets/blank.css" />'
+  end
+
+  test 'assets blank.js' do
+    assert_equal assets('blank.js'), '<script src="/assets/blank.js"></script>'
+  end
+
+  test 'assets blank' do
+    assert_equal assets('blank'), assets('blank.css') << assets('blank.js')
+  end
+
+  test 'assets in production' do
+    Rails.configuration.action_controller[:asset_host] = 'http://assets.com'
+    Rails.configuration.action_controller[:asset_path] = 'assets_path'
+    Rails.configuration.action_controller[:asset_version] = 'version'
+    assert_equal assets('blank.css'), '<link rel="stylesheet" href="http://assets.com/assets_path/version/blank.css" />'
+    assert_equal assets('blank.js'), '<script src="http://assets.com/assets_path/version/blank.js"></script>'
+    assert_equal assets('blank'), assets('blank.css') << assets('blank.js')
+  end
+end

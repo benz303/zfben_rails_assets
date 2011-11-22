@@ -11,11 +11,3 @@ This is plugin to add some useful assets to rails.
 2. update bundle
 
   bundle install
-
-3. install assets
-
-  rake assets:install
-
-4. install assets gems
-
-  bundle install
