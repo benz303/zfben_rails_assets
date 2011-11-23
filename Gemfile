@@ -10,5 +10,3 @@ gem 'compass'
 gem 'therubyracer'
 gem 'coffee-script'
 gem 'uglifier'
-
-#gem 'zfben_rails_assets', :path => File.dirname(__FILE__)

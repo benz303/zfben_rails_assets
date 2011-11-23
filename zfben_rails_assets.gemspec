@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "zfben_rails_assets"
-  s.version     = '0.0.8'
+  s.version     = '0.0.9'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ben"]
   s.email       = ["ben@zfben.com"]
@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = '>= 1.9'
   
   s.add_dependency 'rails', '>=3.1.0'
+  s.add_dependency 'sass'
   s.add_dependency 'compass'
   s.add_dependency 'coffee-script'
   s.add_dependency 'uglifier'

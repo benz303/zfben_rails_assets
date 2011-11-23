@@ -50,7 +50,7 @@ class AssetFormat
       not_found file
     end
   end
-  
+
   def find_file filename
     path = Rails.root.to_s + '/app/assets/' + filename
     if File.exist?(path)

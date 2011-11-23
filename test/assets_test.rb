@@ -9,15 +9,15 @@ end
 class CssTest < ActiveSupport::TestCase
   ["@import file\n", '@import(file)', '@import("file")', '@import "file"', '@import file;', '/* @import file */'].each do |test|
     test('import regex: ' + test)do
-      assert_equal AssetFormat::Css::IMPORT.match(test)[1], 'file'
+      assert_equal AssetFormat::Css::IMPORT.match(test)[1], 'file', AssetFormat::Css::IMPORT.match(test)
     end
   end
 end
 
 class JsTest < ActiveSupport::TestCase
-  ["// @import file\n", '//@import(file)', '//@import("file")', '//@import "file"', '//@import file;', '/* @import file */'].each do |test|
+  ["// @import file\n", '//@import(file)', '//@import("file")', '//@import "file"', '//@import file;', '/* @import file */', "// aaa\n/*\n @import file\n*/"].each do |test|
     test('import regex: ' + test)do
-      assert_equal AssetFormat::Js::IMPORT.match(test)[1], 'file'
+      assert_equal AssetFormat::Js::IMPORT.match(test)[1], 'file', AssetFormat::Js::IMPORT.match(test)
     end
   end
 end
