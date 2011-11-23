@@ -6,16 +6,21 @@ module AssetsHelper
     html = ''
     opts.each do |name|
       name = name.to_s
-      if name.end_with?('.css')
-        html << assets_css(name)
-      elsif name.end_with?('.js')
-        html << assets_js(name)
-      else
-        path = Rails.root.to_s + '/app/assets/' + name
-        css = Dir.glob(([:css] + AssetFormat::Css::EXTEND_FORMATS).map{ |f| path + '.' + f.to_s })
-        js = Dir.glob(([:js] + AssetFormat::Js::EXTEND_FORMATS).map{ |f| path + '.' + f.to_s })
-        html << assets(name + '.css') if css.length > 0
-        html << assets(name + '.js') if js.length > 0
+      format = File.extname(name)
+      if Rails.env.production? && !name.include?('.min.') && (format == '.css' || format == '.js')
+        name = name.gsub(format, '.min' << format)
+      end
+      case format
+        when '.css'
+          html << assets_css(name)
+        when '.js'
+          html << assets_js(name)
+        else
+          path = Rails.root.to_s + '/app/assets/' + name
+          css = Dir.glob(([:css] + AssetFormat::Css::EXTEND_FORMATS).map{ |f| path + '.' + f.to_s })
+          js = Dir.glob(([:js] + AssetFormat::Js::EXTEND_FORMATS).map{ |f| path + '.' + f.to_s })
+          html << assets(name + '.css') if css.length > 0
+          html << assets(name + '.js') if js.length > 0
       end
     end
     html

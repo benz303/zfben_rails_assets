@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "zfben_rails_assets"
-  s.version     = '0.0.7'
+  s.version     = '0.0.8'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ben"]
   s.email       = ["ben@zfben.com"]

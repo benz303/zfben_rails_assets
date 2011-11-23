@@ -117,6 +117,7 @@ end
 
 class AssetsHelperTest < ActionView::TestCase
   setup do
+    Rails.env = 'test'
     Rails.configuration.action_controller[:asset_host] = nil
     Rails.configuration.action_controller[:asset_path] = nil
     Rails.configuration.action_controller[:asset_version] = nil
@@ -135,11 +136,12 @@ class AssetsHelperTest < ActionView::TestCase
   end
 
   test 'assets in production' do
+    Rails.env = 'production'
     Rails.configuration.action_controller[:asset_host] = 'http://assets.com'
     Rails.configuration.action_controller[:asset_path] = 'assets_path'
     Rails.configuration.action_controller[:asset_version] = 'version'
-    assert_equal assets('blank.css'), '<link rel="stylesheet" href="http://assets.com/assets_path/version/blank.css" />'
-    assert_equal assets('blank.js'), '<script src="http://assets.com/assets_path/version/blank.js"></script>'
+    assert_equal assets('blank.css'), '<link rel="stylesheet" href="http://assets.com/assets_path/version/blank.min.css" />'
+    assert_equal assets('blank.js'), '<script src="http://assets.com/assets_path/version/blank.min.js"></script>'
     assert_equal assets('blank'), assets('blank.css') << assets('blank.js')
   end
 end
