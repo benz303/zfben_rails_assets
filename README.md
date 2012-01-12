@@ -1,6 +1,6 @@
 ## SUMMARY
 
-This is plugin to add some useful assets to rails.
+A plugin for replace rails pipline.
 
 [![Build Status](https://secure.travis-ci.org/benz303/zfben_rails_assets.png)](http://travis-ci.org/benz303/zfben_rails_assets)
 
