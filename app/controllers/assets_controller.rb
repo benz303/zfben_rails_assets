@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class AssetsController < ActionController::Base
-  caches_action :index, :show, cache_path: Proc.new{ |c| c.params }, if: Proc.new{ |c| request.get? && c.params[:version] != 'direct' }
-
+  caches_page :index
+  
   def index
     if format_defined?
       render render_assets
