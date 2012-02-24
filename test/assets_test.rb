@@ -87,7 +87,11 @@ class ControllerTest < ActionController::TestCase
     test('import_iteration.min.' + format)do
       get :index, file: 'import_iteration.min', format: format
       assert_response :success
-      assert_equal @response.body, ''
+      if format == 'css'
+        assert_equal @response.body, ''
+      else
+        assert_equal @response.body, ';'
+      end
     end
     
     test('import_404.' + format)do
