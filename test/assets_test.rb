@@ -138,6 +138,10 @@ class AssetsHelperTest < ActionView::TestCase
   test 'assets blank' do
     assert_equal assets('blank'), assets('blank.css') << assets('blank.js')
   end
+  
+  test 'assets file' do
+    assert_equal assets('a.jpg'), '/assets/a.jpg'
+  end
 
   test 'assets in production' do
     Rails.env = 'production'

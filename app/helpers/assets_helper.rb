@@ -21,6 +21,7 @@ module AssetsHelper
           js = Dir.glob(([:js] + AssetFormat::Js::EXTEND_FORMATS).map{ |f| path + '.' + f.to_s })
           html << assets(name + '.css') if css.length > 0
           html << assets(name + '.js') if js.length > 0
+          html << assets_file(name) if css.length == 0 && js.length == 0
       end
     end
     html
@@ -34,6 +35,10 @@ module AssetsHelper
 
   def assets_css url
     "<link rel=\"stylesheet\" href=\"#{asset_host}/#{url}\" />"
+  end
+  
+  def assets_file url
+    "#{asset_host}/#{url}"
   end
   
   def asset_host
