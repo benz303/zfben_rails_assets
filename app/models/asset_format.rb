@@ -82,7 +82,7 @@ class AssetFormat
   def write_file name, text
     dir = Rails.root.to_s + '/tmp/assets/'
     unless File.exist?(dir)
-      FileUtils.mkdir(dir)
+      FileUtils.mkdir_p(dir)
     end
     path = dir + File.basename(name)
     File.open(path, 'w'){ |f| f.write text }
