@@ -1,6 +1,6 @@
 class AssetFormat::Js < AssetFormat
   CONTENT_TYPE = 'text/javascript'
-  IMPORT = /[\/\*]{2}\s*@import[ "'\(]+([^\s"'\);]+)[ "'\);\*\/]*/
+  IMPORT = /[\/\*]{0,2}\s*@import[ "'\(]+([^\s"'\);]+)[\s"'\);]*[\*\/]{0,2}/
   IMPORT_COFFEE = /# *@import[ "'\(]+([^\s"'\);]+)[ "'\)]*/
   EXTEND_FORMATS = [:coffee]
 
