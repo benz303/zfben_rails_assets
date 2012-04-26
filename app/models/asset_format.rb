@@ -35,10 +35,10 @@ class AssetFormat
     @format = @option.last
     path = find_file(@option[0] + '.' + @option.last)
     unless path.nil?
-      text = read_file path
+      text = read_file(path)
       if defined?(self.class::IMPORT)
         regexp = self.class::IMPORT
-        text = import_file regexp, text
+        text = import_file(regexp, text)
       end
       if no_error?
         if @option.include?('min') && self.respond_to?(:minify)
@@ -91,7 +91,7 @@ class AssetFormat
   
   def import_file regexp, text
     text.gsub(regexp){ |s|
-      file = find_file(regexp.match(s)[1])
+      file = find_file(regexp.match(s).to_a.last)
       unless file.nil?
         "\n/* #{file} */\n" << import_file(regexp, read_file(file))
       else

@@ -10,3 +10,5 @@ gem 'compass'
 gem 'therubyracer'
 gem 'coffee-script'
 gem 'uglifier'
+
+gem 'haml'

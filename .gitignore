@@ -1,6 +1,7 @@
 *.gem
 *.log
+.sass-cache
 .bundle
-sass-cache
 Gemfile.lock
 pkg/*
+test/dummy/tmp

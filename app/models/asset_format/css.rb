@@ -2,7 +2,7 @@ require 'sass/css'
 
 class AssetFormat::Css < AssetFormat
   CONTENT_TYPE = 'text/css'
-  IMPORT = /[\/\* ]*@import[ "'\(]+([^url][^\s"'\);]+)[ "'\);\*\/]*/
+  IMPORT = /[\/\* ]*@import[\s("']*(url)?[("'\s]([^\s"'\);]+)["'); \*\/]*/
   EXTEND_FORMATS = [:sass, :scss]
 
   def minify text

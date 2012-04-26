@@ -14,6 +14,10 @@ A plugin for replace rails pipline.
 
   bundle install
 
+3. add .gitignore
+
+  public/assets
+
 ## How to Use
 
 ### Configuration

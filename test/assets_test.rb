@@ -7,9 +7,14 @@ class ModuleTest < ActiveSupport::TestCase
 end
 
 class CssTest < ActiveSupport::TestCase
-  ["@import file\n", '@import(file)', '@import("file")', '@import "file"', '@import file;', '/* @import file */'].each do |test|
+  ["@import file\n", '@import(file)', '@import("file")', '@import "file"', '@import file;', '/* @import file */', '@import url(file);'].each do |test|
     test('import regex: ' + test)do
-      assert_equal AssetFormat::Css::IMPORT.match(test)[1], 'file', AssetFormat::Css::IMPORT.match(test)
+      assert_equal AssetFormat::Css::IMPORT.match(test).to_a.last, 'file', AssetFormat::Css::IMPORT.match(test)
+    end
+  end
+  ["@import file.css\n", '@import(file.css)', '@import("file.css")', '@import "file.css"', '@import file.css;', '/* @import file.css */', '@import url(file.css);'].each do |test|
+    test('import regex: ' + test)do
+      assert_equal AssetFormat::Css::IMPORT.match(test).to_a.last, 'file.css', AssetFormat::Css::IMPORT.match(test)
     end
   end
 end
@@ -17,7 +22,12 @@ end
 class JsTest < ActiveSupport::TestCase
   ["// @import file\n", '//@import(file)', '//@import("file")', '//@import "file"', '//@import file;', '/* @import file */', "// aaa\n/*\n @import file\n*/"].each do |test|
     test('import regex: ' + test)do
-      assert_equal AssetFormat::Js::IMPORT.match(test)[1], 'file', AssetFormat::Js::IMPORT.match(test)
+      assert_equal AssetFormat::Js::IMPORT.match(test).to_a.last, 'file', AssetFormat::Js::IMPORT.match(test)
+    end
+  end
+  ["// @import file.js\n", '//@import(file.js)', '//@import("file.js")', '//@import "file.js"', '//@import file.js;', '/* @import file.js */', "// aaa\n/*\n @import file.js\n*/"].each do |test|
+    test('import regex: ' + test)do
+      assert_equal AssetFormat::Js::IMPORT.match(test).to_a.last, 'file.js', AssetFormat::Js::IMPORT.match(test)
     end
   end
 end
@@ -105,11 +115,23 @@ class ControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal @response.body, ::Sass::Engine.new(File.read(Rails.root.to_s + '/app/assets/sass.sass'), { syntax: :sass, style: :expanded }).render
   end
+  
+  test 'sass_import.sass' do
+    get :index, file: 'sass_import', format: 'css'
+    assert_response :success
+    assert @response.body.include?(File.read(Rails.root.to_s + '/app/assets/blank.css'))
+  end
 
   test 'scss.css' do
     get :index, file: 'scss', format: 'css'
     assert_response :success
     assert_equal @response.body, ::Sass::Engine.new(File.read(Rails.root.to_s + '/app/assets/scss.scss'), { syntax: :scss, style: :expanded }).render
+  end
+  
+  test 'scss_import.scss' do
+    get :index, file: 'scss_import', format: 'css'
+    assert_response :success
+    assert @response.body.include?(File.read(Rails.root.to_s + '/app/assets/blank.css'))
   end
 
   test 'coffee.js' do
@@ -117,6 +139,8 @@ class ControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal @response.body, CoffeeScript.compile(File.read(Rails.root.to_s + '/app/assets/coffee.coffee'))
   end
+  
+  
 end
 
 class AssetsHelperTest < ActionView::TestCase
