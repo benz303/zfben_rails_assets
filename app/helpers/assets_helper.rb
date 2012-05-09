@@ -1,5 +1,9 @@
 module AssetsHelper
   VER = Time.now.to_i.to_s
+  
+  def assets_version
+    VER
+  end
 
   def assets *opts
     return '' if opts.blank?
